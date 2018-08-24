@@ -1,0 +1,65 @@
+//////////////////////////////////////////////////////////////////////
+/*
+    "Keeper Solutions" Token Holders Application - REQUIREMENTS
+*/
+
+/////////////////////////////////
+/*
+    Functional
+*/
+    1. Login
+        - login credentials provided by an administrator
+    // Registered user
+    2. information about user's amount of tokens
+    3. information about overall amount of tokens in the system
+    4. information about user's seniority level
+        - info about benefits that come with this level (token half-life, token income per day)
+    5. information about days spent in the company
+    6. user statistics over a period of time
+        - changing in seniority levels
+        - deviations in token income per days over a period of time
+        - employed/unemployed phases
+    
+    // Admin features - token holders
+    7. information about overall amount of tokens present in the system
+        - corresponding value in cryptocurrency (Ethereum) and "real life" currency (e.g. dollar)
+    
+    8. list of token holders and amount of tokens every holder has.
+    9. managing levels of seniority => adding new, removing, marking benefits that come with each level 
+        (token income per day, half-life period)
+    10. managing token holders
+        - managing seniority level of token holders
+        - managing employment status (employed, unemployed)
+        - information about overall days spent in the company
+    11. company selling features
+        - wizard that guides admin (probably company owner) over the process and actions that will be done
+            in the situation like this. Actions are:
+                - Calculating token based stake for each token holder
+                - invoking Smart Contract transaction to deploy shares to token holders
+
+    // Admin features - share holders
+    12. information about current company value
+    13. information about ownership in the company
+        
+        
+
+
+/////////////////////////////////
+/*
+    Technical (non-functional)
+*/
+
+    1. Smart Contract (SC) holding business logic
+        - when deploying Smart Contract to Ethereum network certain company value (in ethereum cripto-currency) must be send
+            => in company selling point this amount will be, percentage based, deployed to every token holder 
+        - overall token amount present in the system
+        - list/map of token holders
+        - information about amount of tokens each holder owns
+        - functions for managing overall token amount
+        - functions for managing holder's tokens
+        - function for company sell situation => deploys money percentage to every token holder
+        => only contract creator (admin) can access any of the Smart Contract features
+        => PROBLEM: let Smart Contract to automatically record token income on daily basis (for every token holder) (NOT SURE IF THIS IS POSSIBLE) 
+            OR make some server side algorithm that will call Smart Contract transaction to increment holder's token amount? 
+        
+

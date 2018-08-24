@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Token Holders</title>
+
+        <!--Bootstrap layout-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+            crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        
+        <!---->
+
+        <link rel="stylesheet" href="app.css" />
+        <!--<script src="bundle.js"></script>-->
+        <script src="../node_modules/chart.js/dist/Chart.js"></script>
+        <script src="app.js"></script>
+        <style>
+            .mainContainer{
+                /*background-color: white;*/
+                padding-top: 30px;
+                padding-bottom: 30px;
+            }
+            .sectionTokenDistribution{
+                padding-bottom: 30px;
+            }
+            .sectionBody{
+                padding: 30px;
+            }
+            .growBit { 
+                transition: all .2s ease-in-out; }
+            .growBit:hover { 
+                background: #2C96FF;
+                transform: scale(1.05); }
+            .grow { 
+                transition: all .2s ease-in-out; }
+            .grow:hover { 
+                background: #2C96FF;
+                transform: scale(1.3); }
+        </style>
+    </head>
+    <body>
+        <div class="container mainContainer">
+            <div class="container text-center">
+                <h1>Keeper Solutions Token Holders Application</h1>
+            </div>
+            <div class="container" id="navbar">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="loginCardBtn">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="tokensCardBtn">Admin-Tokens</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="detailsCardBtn">Admin-HolderDetails</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="userCardBtn">Registered user</a>
+                    </li>
+                </ul>
+            </div>
+            <hr />
+            <div id="cards">
+                <div class="container" id="cardTokens" hidden>
+                    <hr />
+                    <h3>Token Distribution</h3>
+                    <hr />
+                    <div class="container sectionTokenDistribution">
+                        <div class="row sectionBody">
+                            <div class="col-md-6 text-center">
+                                <span>Top 5 token holders</span>
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                            <div class="col-md-5 text-center" style="padding-top: 30px; padding-bottom: 10px;">
+                                <span>Overall tokens:</span>
+                                <h1 title="Total ammount of tokens"><span><img src="./images/coin.png" style="height: 50px;"/></span>  1 500 000</h1>
+                                <span>Base token amount:</span> 
+                                <h2>1 120 000</h2>
+                                <span>Base token amount Affirmation Date</span>
+                                <h2>12.09.2018.</h2>
+                                <hr />
+                                <span>Token Holders count:</span>
+                                <h2> 12</h2>
+                            </div>
+                            <div class="col-md-1">
+                                <button 
+                                    class="btn btn-info btn-sm" 
+                                    title="Info corner"
+                                    data-container="body" 
+                                    data-toggle="popover" 
+                                    data-placement="right"
+                                    data-trigger="focus" 
+                                    data-content=
+                                    "Base_token_amount - amount of tokens initially distributed among the token holders. Does not contain tokens gained through daily-based token income. 
+                                    Overall_tokens - consists of base token amount and tokens gained through daily-based token income for every token holder.
+                                    "
+                                >
+                                    Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>   
+                    <div class="container sectionHolders">
+                        <div class="container sectionBody">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">Picture</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Surname</th>
+                                        <th scope="col">Base tokens</th>
+                                        <th scope="col">Income tokens</th>
+                                        <th scope="col">Stake percentage</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><img src="./images/account.png" style="height: 30px;" /></td>
+                                        <td>Jane</td>
+                                        <td>Radman</td>
+                                        <td>350000</td>
+                                        <td>0</td>
+                                        <td>31</td>
+                                        <td><button class="btn btn-primary">Details</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="./images/account.png" style="height: 30px;" /></td>
+                                        <td>Miro</td>
+                                        <td>Salkovic</td>
+                                        <td>70000</td>
+                                        <td>0</td>
+                                        <td>6.3</td>
+                                        <td><button class="btn btn-primary">Details</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="./images/account.png" style="height: 30px;" /></td>
+                                        <td>Janko</td>
+                                        <td>Šalković</td>
+                                        <td>400000</td>
+                                        <td>0</td>
+                                        <td>36</td>
+                                        <td><button class="btn btn-primary">Details</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" id="cardDetails">
+                    <hr />
+                    <h3>Token Holder Details</h3>
+                    <hr />
+                    <div class="sectionBody container" id="aboutTokenHolder">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <img class="glow" src="./images/profilnaKS-smanjena.jpg" style="width: 100%;" />
+                            </div>
+                            <div class="col-md-4">
+                                <span>Name:</span>
+                                <h3>Janko Šalković</h3>
+                                <span>Token amount:</span>
+                                <h1>
+                                    120 300 
+                                    <button 
+                                        class="badge badge-secondary growBit" 
+                                        role="button" 
+                                        data-toggle="popover" 
+                                        data-trigger="focus" 
+                                        title="Global state" 
+                                        data-content="Token holders count: 12. Overall token amount: 1 200 000."
+                                    >
+                                        12 %
+                                    </button>
+                                </h1>
+                                <span>Token distribution per holder:</span>
+                                <canvas id="pieChartHolder" style="width: 100%;"></canvas>
+                                <span>In company since:</span>
+                                <h4>July 2018.</h4>
+                            </div>
+                            <div class="col-md-5 text-center">
+                                <span>Seniority level:</span>
+                                <div id="seniorityLevel" >
+                                    <h4 id="seniority">Junior</h4>
+                                    <div class="form-group" id="seniorityPicker" hidden>
+                                        <select class="form-control" id="sel1">
+                                            <option>Junior</option>
+                                            <option>Mid-level</option>
+                                            <option>Senior</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <span>Income per day:</span>
+                                <h4><span id="income">3</span> tokens </h4>
+                                <span>Token half-life:</span>
+                                <h4><span id="halfLife">1</span> year(s) </h4>
+                                <hr />
+                                <span>Employment status:</span>
+                                <h2><span value="1" id="employmentStatus">Employed</span>&nbsp;<img id="changeEmplBtn" class="grow" title="Change status" src="./images/change.png" style="height: 40px; border-radius: 50%;"/></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sectionBody container" id="tokenHolderStatistics">
+                        <div class="container text-center" id="statisticsIncome">
+                            <canvas id="graphIncome"></canvas>
+                        </div>
+                        <br /><br/>
+                        <div class="container" id="statisticsEmployment">
+                            <canvas id="graphEmployment"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="container" id="cardLogin" hidden>
+                    <h1>Login</h1>
+                </div>
+                <div class="container" id="cardUser" hidden>
+                    <h1>Registered user</h1>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

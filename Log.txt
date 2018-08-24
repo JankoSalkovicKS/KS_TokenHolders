@@ -1,0 +1,48 @@
+//////////////////////////////////////////////////////////////////////
+/*
+    Keeper Solutions Shares Tracker Application
+*/
+//////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////
+/*
+    Recent notices
+*/
+    - app name will surelly change
+    - current infos are gathered from Slack communication with Stephen 
+
+/*
+    What's going on here?
+*/
+
+    - Stephen's words: 
+        1. 'The use case in Keeper Solutions could be the issuing of tokens to employees as a way to provide some ownership in the company'
+        2. 'The idea is to provide a stake in the company for team members which corresponds to the contribution that people have made. 
+            So, for example we could link say 10% of the company's shares to a set of tokens and then find a way to allocate the tokens
+            to team members.  We would need to consider the rules for this, and how they could be allocated.  It might or might not work, 
+            but I think it would be a good use case to research'
+        3. 'I thought it might be possible for team members to apply for tokens based on their length of stay in the company to date.
+            The app might then allocate tokens on an ongoing basis (e.g. 1 additional token for each day worked)
+            If the company were sold on a given date, then the value of the company would be split based on the number of tokens held 
+            by each team member.
+
+            Then there is the tricky issue of what about people who leave the company.... perhaps they get to hold on to their tokens, 
+            but the tokens are gradually diluted as more and more tokens are issued each month'
+
+    - Jankova interpretacija:
+        - dijelovi firme bi se dijelili samo ljudima koji su na višim pozicijama, zaduženima za napredak firme i vođenje ljudima
+        - uzeti neki postotak vrijednosti firme -> prenijeti ga u neku tokensku protuvrijednost.
+        - udjeli u tokenima, pojedinih djelatnika, morali bi se nekako povećavati s vremenom kojeg su oni proveli u firmi
+        - ako se firma proda, ovisno o udjelima tokena, svaki od zaposlenika koji posjeduje token, morao bi naslijediti neku novčanu vrijednost
+        - što s ljudima koji su imali tokene, a napustili firmu
+
+/////////////////////////////////
+/*
+    22.08.2018. - dnevni cilj
+*/
+
+    1. vidjeti od Stephena što on smatra tokenima i na koji bi se način prenio novac u tokene
+    2. je li vlasnikova dobra volja dati npr. 10 % firme značajnijim radnicima. Što bi značilo da on bilo kad može povući te novce? Isto tako on može i dodavati udio ukupne firme
+        koji želi dijeliti među djelatnicima
+            => ukoliko radnici svojim udjelom automatski steknu i neku razinu prava, mora li se njih pitati u slućaju povlačenja dijela/svih tokena
+    3. algoritam raspodjele udjela firme ne samo po vremenu provedenom u firmi već i po razini odgovornosti?
