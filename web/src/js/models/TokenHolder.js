@@ -1,22 +1,12 @@
-
-const SeniorityLevels = {
-    junior: "Junior",
-    midLevel: "Mid-level",
-    senior: "Senior"
-};
-const IncomeLevels = {
-    junior: 1,
-    midLevel: 2.5,
-    senior: 3.5
-}
-
 const TokenHolder = function(
     firstName,
     lastName,
     overallTokens,
     baseTokens,
     incomeTokens,
+    seniorityLevel,
     employmentStatus,
+    imageURL
 
 ){
     this.firstName = firstName;
@@ -24,7 +14,9 @@ const TokenHolder = function(
     this.overallTokens = overallTokens;
     this.baseTokens = baseTokens;
     this.incomeTokens = incomeTokens;
+    this.seniorityLevel = seniorityLevel;
     this.employmentStatus = employmentStatus;
+    this.imageURL = imageURL
 };
 
-export { SeniorityLevels, IncomeLevels, TokenHolder };
+export { TokenHolder };

@@ -48,8 +48,8 @@
             <div class="container text-center">
                 <h1>Keeper Solutions Token Holders Application</h1>
             </div>
-            <div class="container" id="navbar">
-                <ul class="nav justify-content-center">
+            <div class="container">
+                <ul class="nav justify-content-center" id="navbar">
                     <li class="nav-item">
                         <a class="nav-link" href="#" id="loginCardBtn">Login</a>
                     </li>
@@ -66,7 +66,7 @@
             </div>
             <hr />
             <div id="cards">
-                <div class="container" id="cardTokens" hidden>
+                <div class="container" id="cardTokenDistribution" hidden>
                     <hr />
                     <h3>Token Distribution</h3>
                     <hr />
@@ -78,14 +78,14 @@
                             </div>
                             <div class="col-md-5 text-center" style="padding-top: 30px; padding-bottom: 10px;">
                                 <span>Overall tokens:</span>
-                                <h1 title="Total ammount of tokens"><span><img src="./img/coin.png" style="height: 50px;"/></span>  1 500 000</h1>
+                                <h1 title="Total ammount of tokens"><span><img src="./img/coin.png" style="height: 50px;"/></span><span id="totalTokenAmount"></span></h1>
                                 <span>Base token amount:</span> 
-                                <h2>1 120 000</h2>
+                                <h2 id="baseTokenAmount"></h2>
                                 <span>Base token amount Affirmation Date</span>
-                                <h2>12.09.2018.</h2>
+                                <h2 id="baseTokenAmountDate"></h2>
                                 <hr />
                                 <span>Token Holders count:</span>
-                                <h2> 12</h2>
+                                <h2 id="tokenHoldersCount"></h2>
                             </div>
                             <div class="col-md-1">
                                 <button 
@@ -119,8 +119,8 @@
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody id="tokenHoldersList">
+                                    <!-- <tr>
                                         <td><img src="./img/account.png" style="height: 30px;" /></td>
                                         <td>Jane</td>
                                         <td>Radman</td>
@@ -128,31 +128,13 @@
                                         <td>0</td>
                                         <td>31</td>
                                         <td><button class="btn btn-primary">Details</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./img/account.png" style="height: 30px;" /></td>
-                                        <td>Miro</td>
-                                        <td>Salkovic</td>
-                                        <td>70000</td>
-                                        <td>0</td>
-                                        <td>6.3</td>
-                                        <td><button class="btn btn-primary">Details</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td><img src="./img/account.png" style="height: 30px;" /></td>
-                                        <td>Janko</td>
-                                        <td>Šalković</td>
-                                        <td>400000</td>
-                                        <td>0</td>
-                                        <td>36</td>
-                                        <td><button class="btn btn-primary">Details</button></td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="container" id="cardDetails">
+                <div class="container" id="cardHolderDetails" hidden>
                     <hr />
                     <h3>Token Holder Details</h3>
                     <hr />
@@ -189,9 +171,9 @@
                                     <h4 id="seniority">Junior</h4>
                                     <div class="form-group" id="seniorityPicker" hidden>
                                         <select class="form-control" id="sel1">
-                                            <option>Junior</option>
+                                            <!-- <option>Junior</option>
                                             <option>Mid-level</option>
-                                            <option>Senior</option>
+                                            <option>Senior</option> -->
                                         </select>
                                     </div>
                                 </div>
