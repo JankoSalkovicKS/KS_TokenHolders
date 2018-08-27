@@ -1,8 +1,8 @@
-//for popovers to work
-$(function () {
-    $('[data-toggle="popover"]').popover()
-})
+//imports
+import { SeniorityLevels } from './models/TokenHolder';
 
+
+/* DOCUMENT LOADED */
 document.addEventListener("DOMContentLoaded", function(event) {
 
     // holder employment status manipulation
@@ -205,4 +205,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     showHolderEmploymentGraph();
 })
 
-
+//for popovers to work
+$(function () {
+    $('[data-toggle="popover"]').popover()
+});
