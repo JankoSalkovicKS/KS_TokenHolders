@@ -1,4 +1,7 @@
+import { join } from "path";
+
 const TokenHolder = function(
+    id,
     firstName,
     lastName,
     overallTokens,
@@ -6,9 +9,11 @@ const TokenHolder = function(
     incomeTokens,
     seniorityLevel,
     employmentStatus,
-    imageURL
+    imageURL,
+    joinDate
 
 ){
+    this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
     this.overallTokens = overallTokens;
@@ -16,7 +21,8 @@ const TokenHolder = function(
     this.incomeTokens = incomeTokens;
     this.seniorityLevel = seniorityLevel;
     this.employmentStatus = employmentStatus;
-    this.imageURL = imageURL
+    this.imageURL = imageURL;
+    this.joinDate = joinDate;
 };
 
 export { TokenHolder };

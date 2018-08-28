@@ -1,3 +1,5 @@
+////////////////////////////////////////////////////
+/* Token distribution DOM */
 var setOverallTokens = (amount) => {
     document.getElementById('totalTokenAmount').textContent = amount;
 };
@@ -24,64 +26,21 @@ var fillTokenHoldersList = (tokenHoldersList) => {
             <td>${holder.baseTokens}</td>
             <td>${holder.incomeTokens}</td>
             <td>--</td>
-            <td><button class="btn btn-primary">Details</button></td>
+            <td><button class="btn btn-primary" id="${holder.id}">Details</button></td>
         </tr>`;
 
         DOMList.insertAdjacentHTML('beforeend', htmlCode);
     }
 };
-var showCard = (cardID) => {
-    document.getElementById(cardID).hidden = false;
-}; 
-
-var displayOptionsSenioritySelectList = (seniorityLevels, count) => {
-    var selectList = document.getElementById('sel1');
-    selectList.innerHTML = '';
-    for(let s of seniorityLevels){
-        let newOption = document.createElement('option');
-        newOption.value = s.level;
-        newOption.text = s.level;
-        selectList.add(newOption);
-    }
-};
-
-var updateHolderTokenFactors = (income, halfLife) => {
-    document.getElementById('income').textContent = income;
-    document.getElementById('halfLife').textContent = halfLife;
-};
-
-var displayNewSeniorityLevel = (seniority) => {
-    document.getElementById('seniority').textContent = seniority;
-};
-
-var changeEmploymentStatus = () => {
-    let employmentStatus = document.getElementById('employmentStatus');
-
-    let status = employmentStatus.getAttribute('value');
-    if(status === '1'){
-        employmentStatus.setAttribute('value', '2');
-        employmentStatus.textContent = "Unemployed";
-    }
-    else if(status === '2'){
-        employmentStatus.setAttribute('value', '1');
-        employmentStatus.textContent = "Employed";
-    }
-    else{
-        console.log("Employment status. Smth went wrong.");
-    }
-}
-
-/* Render Charts */
-// token distribution PieChart
 var showOverallTokensPieChart = (labels, data) => {
     var ctxP = document.getElementById("pieChart");
     var myPieChart = new Chart(ctxP, {
         type: 'pie',
         data: {
-            labels: labels,
+            labels: labels, //labels
             datasets: [
                 {
-                    data: data,
+                    data: data, //data
                     backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
                     hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
                 }
@@ -93,17 +52,87 @@ var showOverallTokensPieChart = (labels, data) => {
     });
 };
 
+////////////////////////////////////////////////////
+/* Cards */
+var showCard = (cardID) => {
+    document.getElementById(cardID).hidden = false;
+}; 
+var hideAllCards = () => {
+    var children = document.getElementById('cards').childNodes;
+    for(var child of children) {
+        if(child.nodeType == Node.ELEMENT_NODE){
+            child.hidden = true;
+        }
+    }
+}
+
+////////////////////////////////////////////////////
+/* Token holder details */
+var setHoldersProfilePic = (imageUrl) => {
+    document.getElementById('holderProfilePic').setAttribute('src', imageUrl);
+};
+var setHoldersName = (name) => {
+    document.getElementById('holderName').textContent = name;
+};
+var setHoldersTokenAmount = (amount) => {
+    document.getElementById('holderTokenAmount').textContent = amount;
+};
+var setHoldersTokenStake = (percentage) => {
+    document.getElementById('holderStakePercentage').textContent = percentage;
+};
+var showHoldersJoinDate = (joinDate) => {
+    document.getElementById('joinDate').textContent = joinDate;
+};
+var setEmploymentStatus = (employmentStatus, holderId) => {
+    document.getElementById('employmentStatus').textContent = employmentStatus;
+    document.getElementById('employmentStatus').setAttribute('value', holderId);
+};
+
+var initSenioritySelectList = (seniorityLevels) => {
+    var selectList = document.getElementById('sel1');
+    selectList.innerHTML = '';
+    for(let s of seniorityLevels){
+        let newOption = document.createElement('option');
+        newOption.value = s.level;
+        newOption.text = s.level;
+        selectList.add(newOption);
+    }
+};
+var updateHolderTokenFactors = (income, halfLife) => {
+    document.getElementById('income').textContent = income;
+    document.getElementById('halfLife').textContent = halfLife;
+};
+var setSeniorityLevel = (seniority) => {
+    document.getElementById('seniority').textContent = seniority;
+};
+var changeEmploymentStatus = () => {
+    let employmentStatus = document.getElementById('employmentStatus');
+
+    let status = employmentStatus.textContent;
+    if(status === 'Employed'){
+        employmentStatus.textContent = "Unemployed";
+    }
+    else if(status === 'Unemployed'){
+        employmentStatus.textContent = "Employed";
+    }
+    else{
+        console.log("Employment status. Smth went wrong.");
+    }
+}
+
+/* Render Charts */
+
 // particular holder token PieChart
-var showHolderTokensPieChart = () => {
-    
-    var ctxP = document.getElementById("pieChartHolder");
+var showHolderTokensPieChart = (baseTokens, incomeTokens) => {
+
+    var ctxP = document.getElementById("holderPieChart");
     var myPieChart = new Chart(ctxP, {
         type: 'pie',
         data: {
             labels: ["Base tokens", "Daily income tokens"],
             datasets: [
                 {
-                    data: [110000, 10300],
+                    data: [baseTokens, incomeTokens],
                     backgroundColor: ["#F7464A", "#46BFBD"],
                     hoverBackgroundColor: ["#FF5A5E", "#5AD3D1"]
                 }
@@ -195,13 +224,20 @@ export {
     showHolderTokensPieChart,
     showOverallTokensPieChart,
     changeEmploymentStatus,
-    displayNewSeniorityLevel,
+    setSeniorityLevel,
     updateHolderTokenFactors,
-    displayOptionsSenioritySelectList,
+    initSenioritySelectList,
     showCard,
+    hideAllCards,
     setOverallTokens,
     setBaseTokenAmount,
     setBaseTokenAmountDate,
     setTokenHoldersCount,
-    fillTokenHoldersList
+    fillTokenHoldersList,
+    setHoldersProfilePic,
+    setHoldersName,
+    setHoldersTokenAmount,
+    setHoldersTokenStake,
+    showHoldersJoinDate,
+    setEmploymentStatus
  };

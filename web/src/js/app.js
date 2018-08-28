@@ -1,16 +1,49 @@
 //imports
 import * as UIController from './UIController';
-import * as testData from './models/testData';
+import * as testData from './modules/testData';
 
 /* DOCUMENT LOADED */
 document.addEventListener("DOMContentLoaded", function(event) {
 
     initTokenDistributionScreen();
 
+    // change card
+    document.getElementById('navbar').addEventListener('click', (event) => {
+        if(event.target.className === 'nav-link'){
+            switch(event.target.getAttribute('id')){
+                case "tokensCardBtn":
+                    initTokenDistributionScreen();
+                    break;
+                case "detailsCardBtn":
+                    initTokenHolderDetailsScreen();
+                    break;
+                case "loginCardBtn":
+                    console.log("Not implemented!");
+                    break;
+                case "userCardBtn":
+                    console.log("Not implemented!");
+                    break;
+            }
+        }
+    });
+    // go to holder's details
+    document.getElementById('tokenHoldersList').addEventListener('click', (event) => {
+        if(event.target.className === 'btn btn-primary'){
+            initTokenHolderDetailsScreen(event.target.getAttribute('id'));
+        }
+    });
 
+    // token holder details
     // holder employment status change
     document.getElementById('changeEmplBtn').addEventListener('click', (event) => {
         if(confirm("You are about to change Token Holders employment status. Want to proceed?")){
+            let holder = testData.TOKEN_HOLDERS_MAP.get(parseInt(document.getElementById('employmentStatus').getAttribute('value')));
+            if(holder.employmentStatus === "Employed"){
+                holder.employmentStatus = "Unemployed";
+            }
+            else{
+                holder.employmentStatus = "Employed";
+            }
             UIController.changeEmploymentStatus();
         }
     });
@@ -19,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         
         let seniority = extractPickedSenioritiyLevel(event);
         
-        updateSeniorityLevel(seniority);
+        setSeniorityLevel(seniority);
 
     });
     document.getElementById('seniorityLevel').addEventListener('mouseover', () => {
@@ -31,27 +64,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.getElementById('seniorityPicker').hidden = true;
         document.getElementById('seniority').hidden = false;
     });
-
-    //cards
-    document.getElementById('tokensCardBtn').addEventListener('click', (event) => {
-        initTokenDistributionScreen();
-    });
-    document.getElementById('detailsCardBtn').addEventListener('click', (event) => {
-        initTokenHolderDetailsScreen();
-    });
-    document.getElementById('loginCardBtn').addEventListener('click', (event) => {
-        console.log("Not implemented!");
-    });
-    document.getElementById('userCardBtn').addEventListener('click', (event) => {
-        console.log("Not implemented!");
-    });
-    
 })
+/* */
 
 /* HELPER FUNCTIONS */
 var initTokenDistributionScreen = () => {
-    hideAllCards();
-
+    //hide everything
+    UIController.hideAllCards();
+    //show distribution pie chart
     let labels = [];
     let data = [];
     for(let user of testData.TOKEN_HOLDERS){
@@ -59,32 +79,36 @@ var initTokenDistributionScreen = () => {
         data.push(user.overallTokens);
     }
     UIController.showOverallTokensPieChart(labels, data)
-
+    //show right column info
     UIController.setOverallTokens(testData.OVERALL_TOKENS);
     UIController.setBaseTokenAmount(testData.BASE_TOKEN_AMOUNT);
     UIController.setBaseTokenAmountDate(testData.BASE_TOKEN_AMOUNT_DATE);
     UIController.setTokenHoldersCount(testData.TOKEN_HOLDERS_COUNT);
     UIController.fillTokenHoldersList(testData.TOKEN_HOLDERS);
-
+    //show card
     UIController.showCard('cardTokenDistribution');
 };
-var initTokenHolderDetailsScreen = () => {
-    hideAllCards();
+var initTokenHolderDetailsScreen = (id) => {
+    UIController.hideAllCards();
 
+    let holder = testData.TOKEN_HOLDERS_MAP.get(parseInt(id));
 
+    UIController.setHoldersProfilePic(holder.imageURL);
+    UIController.setHoldersName(holder.firstName + " " + holder.lastName);
+    UIController.setHoldersTokenAmount(holder.overallTokens);
+    UIController.setHoldersTokenStake(100 * Math.floor(holder.overallTokens / testData.OVERALL_TOKENS));
+    UIController.showHolderTokensPieChart(holder.baseTokens, holder.incomeTokens);
+    UIController.showHoldersJoinDate(holder.joinDate);
+    //seniority level - init
+    UIController.initSenioritySelectList(testData.SENIORITY_LEVELS);
+    //seniority level - set
+    setSeniorityLevel(holder.seniorityLevel);
+    UIController.setEmploymentStatus(holder.employmentStatus, holder.id);
 
     UIController.showCard('cardHolderDetails');
 };
-function hideAllCards(){
-    var children = document.getElementById('cards').childNodes;
-    for(var child of children) {
-        if(child.nodeType == Node.ELEMENT_NODE){
-            child.hidden = true;
-        }
-    }
-}
-var updateSeniorityLevel = (seniority) => {
-    UIController.displayNewSeniorityLevel(seniority);
+var setSeniorityLevel = (seniority) => {
+    UIController.setSeniorityLevel(seniority);
 
     for(let s of testData.SENIORITY_LEVELS){
         if(seniority === s.level){
@@ -94,20 +118,10 @@ var updateSeniorityLevel = (seniority) => {
     }
 }
 
-var initializeSeniorityLevels = (seniorityLevels) => {
-    UIController.displayOptionsSenioritySelectList(seniorityLevels);
-};
 // extracts seniority level from event object
 var extractPickedSenioritiyLevel = (event) => {
     let element = event.target;
     return element.options[element.selectedIndex].value;
-};
-//initializes graphs
-var initializeGraphs = () => {
-    UIController.showHolderEmploymentGraph();
-    UIController.showHolderIncomeGraph();
-    UIController.showHolderTokensPieChart();
-    UIController.showOverallTokensPieChart();
 };
 
 //for popovers to work
