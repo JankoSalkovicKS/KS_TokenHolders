@@ -76,7 +76,7 @@ var setHoldersName = (name) => {
     document.getElementById('holderName').textContent = name;
 };
 var setHoldersTokenAmount = (amount) => {
-    document.getElementById('holderTokenAmount').textContent = amount;
+    document.getElementById('holderTokenAmount').textContent = numberWithCommas(amount);
 };
 var setHoldersTokenStake = (percentage) => {
     document.getElementById('holderStakePercentage').textContent = percentage + " %";
