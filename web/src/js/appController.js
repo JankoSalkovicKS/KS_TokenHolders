@@ -1,6 +1,6 @@
 //imports
-import * as UIController from './UIController';
-import * as testData from './modules/testData';
+import * as UIController from './viewController';
+import * as dataRepo from './dataRepository';
 
 /* DOCUMENT LOADED */
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // holder employment status change
     document.getElementById('changeEmplBtn').addEventListener('click', (event) => {
         if(confirm("You are about to change Token Holders employment status. Want to proceed?")){
-            let holder = testData.TOKEN_HOLDERS_MAP.get(parseInt(document.getElementById('employmentStatus').getAttribute('value')));
+            let holder = dataRepo.getTokenHoldersMap().get(parseInt(document.getElementById('employmentStatus').getAttribute('value')));
             if(holder.employmentStatus === "Employed"){
                 holder.employmentStatus = "Unemployed";
             }
@@ -74,43 +74,48 @@ var initTokenDistributionScreen = () => {
     //show distribution pie chart
     let labels = [];
     let data = [];
-    for(let user of testData.TOKEN_HOLDERS){
+    for(let user of dataRepo.getTokenHoldersList()){
         labels.push(user.firstName + " " + user.lastName);
         data.push(user.overallTokens);
     }
     UIController.showOverallTokensPieChart(labels, data)
     //show right column info
-    UIController.setOverallTokens(testData.OVERALL_TOKENS);
-    UIController.setBaseTokenAmount(testData.BASE_TOKEN_AMOUNT);
-    UIController.setBaseTokenAmountDate(testData.BASE_TOKEN_AMOUNT_DATE);
-    UIController.setTokenHoldersCount(testData.TOKEN_HOLDERS_COUNT);
-    UIController.fillTokenHoldersList(testData.TOKEN_HOLDERS);
+    UIController.setOverallTokens(dataRepo.getOverallTokensAmount());
+    UIController.setBaseTokenAmount(dataRepo.getBaseTokenAmount());
+    UIController.setBaseTokenAmountDate(dataRepo.getBaseTokenDistributionDate());
+    UIController.setTokenHoldersCount(dataRepo.getTokenHoldersCount());
+    UIController.fillTokenHoldersList(dataRepo.getTokenHoldersList(), dataRepo.getOverallTokensAmount());
     //show card
     UIController.showCard('cardTokenDistribution');
 };
 var initTokenHolderDetailsScreen = (id) => {
     UIController.hideAllCards();
 
-    let holder = testData.TOKEN_HOLDERS_MAP.get(parseInt(id));
+    let holder = dataRepo.getTokenHoldersMap().get(parseInt(id));
 
     UIController.setHoldersProfilePic(holder.imageURL);
     UIController.setHoldersName(holder.firstName + " " + holder.lastName);
     UIController.setHoldersTokenAmount(holder.overallTokens);
-    UIController.setHoldersTokenStake(100 * Math.floor(holder.overallTokens / testData.OVERALL_TOKENS));
+    UIController.setHoldersTokenStake( Math.round((100 *holder.overallTokens / dataRepo.getOverallTokensAmount())));
+    UIController.showBadgeGlobalStatus(dataRepo.getTokenHoldersCount(), dataRepo.getOverallTokensAmount());
     UIController.showHolderTokensPieChart(holder.baseTokens, holder.incomeTokens);
     UIController.showHoldersJoinDate(holder.joinDate);
     //seniority level - init
-    UIController.initSenioritySelectList(testData.SENIORITY_LEVELS);
+    UIController.initSenioritySelectList(dataRepo.getSeniorityLevels());
     //seniority level - set
     setSeniorityLevel(holder.seniorityLevel);
     UIController.setEmploymentStatus(holder.employmentStatus, holder.id);
+
+    //not implemented
+    UIController.showHolderIncomeGraph();
+    UIController.showHolderEmploymentGraph();
 
     UIController.showCard('cardHolderDetails');
 };
 var setSeniorityLevel = (seniority) => {
     UIController.setSeniorityLevel(seniority);
 
-    for(let s of testData.SENIORITY_LEVELS){
+    for(let s of dataRepo.getSeniorityLevels()){
         if(seniority === s.level){
             UIController.updateHolderTokenFactors(s.income, s.halflife);
             break;

@@ -1,10 +1,10 @@
 ////////////////////////////////////////////////////
 /* Token distribution DOM */
 var setOverallTokens = (amount) => {
-    document.getElementById('totalTokenAmount').textContent = amount;
+    document.getElementById('totalTokenAmount').textContent = numberWithCommas(amount);
 };
 var setBaseTokenAmount = (amount) => {
-    document.getElementById('baseTokenAmount').textContent = amount;
+    document.getElementById('baseTokenAmount').textContent = numberWithCommas(amount);
 };
 var setBaseTokenAmountDate = (date) => {
     document.getElementById('baseTokenAmountDate').textContent = date;
@@ -13,25 +13,26 @@ var setTokenHoldersCount = (holdersCount) => {
     document.getElementById('tokenHoldersCount').textContent = holdersCount;
 };
 
-var fillTokenHoldersList = (tokenHoldersList) => {
+var fillTokenHoldersList = (tokenHoldersList, overallTokens) => {
     let DOMList = document.getElementById('tokenHoldersList');
     DOMList.innerHTML = "";
 
     for(let holder of tokenHoldersList){
         let htmlCode = 
         `<tr>
-            <td><img src="${holder.imageURL}" style="height: 30px;" /></td>
+            <td class="text-center"><img src="${holder.imageURL}" style="height: 30px;" /></td>
             <td>${holder.firstName}</td>
             <td>${holder.lastName}</td>
-            <td>${holder.baseTokens}</td>
-            <td>${holder.incomeTokens}</td>
-            <td>--</td>
-            <td><button class="btn btn-primary" id="${holder.id}">Details</button></td>
+            <td class="text-right">${numberWithCommas(holder.baseTokens)}</td>
+            <td class="text-right">${numberWithCommas(holder.incomeTokens)}</td>
+            <td class="text-right">${Math.round((100 *holder.overallTokens / overallTokens))} %</td>
+            <td class="text-right"><button class="btn btn-primary" id="${holder.id}">Details</button></td>
         </tr>`;
 
         DOMList.insertAdjacentHTML('beforeend', htmlCode);
     }
 };
+//21 14 48 16
 var showOverallTokensPieChart = (labels, data) => {
     var ctxP = document.getElementById("pieChart");
     var myPieChart = new Chart(ctxP, {
@@ -78,8 +79,14 @@ var setHoldersTokenAmount = (amount) => {
     document.getElementById('holderTokenAmount').textContent = amount;
 };
 var setHoldersTokenStake = (percentage) => {
-    document.getElementById('holderStakePercentage').textContent = percentage;
+    document.getElementById('holderStakePercentage').textContent = percentage + " %";
 };
+var showBadgeGlobalStatus = (holdersCount, overallTokens) => {
+    document.getElementById('globalInfo').setAttribute(
+        'data-content',
+        `Token holders count: ${holdersCount}. Overall token amount: ${overallTokens}.`
+    );
+}
 var showHoldersJoinDate = (joinDate) => {
     document.getElementById('joinDate').textContent = joinDate;
 };
@@ -218,6 +225,10 @@ var showHolderEmploymentGraph = () => {
     });
 };
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 export { 
     showHolderEmploymentGraph,
     showHolderIncomeGraph,
@@ -238,6 +249,7 @@ export {
     setHoldersName,
     setHoldersTokenAmount,
     setHoldersTokenStake,
+    showBadgeGlobalStatus,
     showHoldersJoinDate,
     setEmploymentStatus
  };
