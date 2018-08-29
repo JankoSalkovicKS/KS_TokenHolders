@@ -1,16 +1,15 @@
 import * as testData  from './testData';
 
-    // TOKEN_HOLDERS,
-    // TOKEN_HOLDERS_MAP,
-    // SENIORITY_LEVELS_COUNT, 
-    // SENIORITY_LEVELS, 
-    // TOKEN_HOLDERS_COUNT, 
-    // OVERALL_TOKENS, 
-    // INCOME_TOKEN_AMOUNT,
-    // BASE_TOKEN_AMOUNT, 
-    // BASE_TOKEN_AMOUNT_DATE  
-
 // interface
+var getTokenHolderEmploymentsById = (id) => {
+    return testData.TOKEN_HOLDERS_EMPLOYMENT_STATUS_MAP.get(id);
+};
+var getTokenHolderIncomesById = (id) => {
+    return testData.TOKEN_HOLDERS_INCOMES_MAP.get(id);
+};
+var getTokenHolderById = (id) => {
+    return testData.TOKEN_HOLDERS_MAP.get(id);
+}
 var getTokenHoldersList = () => {
     return testData.TOKEN_HOLDERS;
 };
@@ -40,8 +39,10 @@ var getBaseTokenDistributionDate = () => {
 };
 
 export {
+    getTokenHolderEmploymentsById,
+    getTokenHolderIncomesById,
+    getTokenHolderById,
     getTokenHoldersList,
-    getTokenHoldersMap,
     getSeniorityLevelsCount,
     getSeniorityLevels,
     getTokenHoldersCount,

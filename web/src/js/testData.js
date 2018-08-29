@@ -1,4 +1,6 @@
 import { TokenHolder } from './models/TokenHolder';
+import { IncomeRecord } from './models/IncomeRecord';
+import { EmploymentRecord } from './models/EmploymentRecord';
 
 let SENIORITY_LEVELS = [
     {
@@ -31,7 +33,41 @@ let TOKEN_HOLDERS_MAP = (() => {
     }
     return map;
 })();
-//console.log(TOKEN_HOLDERS_MAP);
+//incomes for the past 6 months
+const TOKEN_HOLDERS_INCOMES_MAP_LIMIT = 6;
+let TOKEN_HOLDERS_INCOMES_MAP = (() => {
+    let map = new Map();
+    // map.set(1, [new IncomeRecord('8.2018', 2.5), new IncomeRecord('7.2018', 1)]);
+    // map.set(2, [new IncomeRecord('8.2018', 3.5), new IncomeRecord('7.2018', 3.5), new IncomeRecord('6.2018', 3.5),
+    //     new IncomeRecord('5.2018', 3.5), new IncomeRecord('4.2018', 2.5), new IncomeRecord('3.2018', 2.5)]);
+    // map.set(3, [new IncomeRecord('8.2018', 3.5), new IncomeRecord('7.2018', 3.5), new IncomeRecord('6.2018', 3.5),
+    //     new IncomeRecord('5.2018', 3.5), new IncomeRecord('4.2018', 3.5), new IncomeRecord('3.2018', 3.5)]);
+    // map.set(4, [new IncomeRecord('8.2018', 3.5), new IncomeRecord('7.2018', 2.5), new IncomeRecord('6.2018', 2.5),
+    // new IncomeRecord('5.2018', 2.5), new IncomeRecord('4.2018', 2.5), new IncomeRecord('3.2018', 1)]);
+    map.set(1, [0, 0, 0, 0, 1, 1]);
+    map.set(2, [2.5, 2.5, 2.5, 2.5, 2.5, 3.5]);
+    map.set(3, [3.5, 3.5, 3.5, 3.5, 3.5, 3.5]);
+    map.set(4, [1, 1, 2.5, 2.5, 2.5, 2.5]);
+    
+    return map;
+})();
+//employment status for the past 6 months
+const TOKEN_HOLDERS_EMPLOYMENT_STATUS_MAP_LIMIT = 6;
+let TOKEN_HOLDERS_EMPLOYMENT_STATUS_MAP = (() => {
+    let map = new Map();
+    // map.set(1, [new EmploymentRecord('8.2018', "Employed"), new EmploymentRecord('7.2018', "Employed")]);
+    // map.set(2, [new EmploymentRecord('8.2018', "Employed"), new EmploymentRecord('7.2018', "Employed"), new EmploymentRecord('6.2018', "Unemployed"),
+    //     new EmploymentRecord('5.2018', "Employed"), new EmploymentRecord('4.2018', "Employed"), new EmploymentRecord('3.2018', "Employed")]);
+    // map.set(3, [new EmploymentRecord('8.2018', "Employed"), new EmploymentRecord('7.2018', "Employed"), new EmploymentRecord('6.2018', "Employed"),
+    //     new EmploymentRecord('5.2018', "Employed"), new EmploymentRecord('4.2018', "Employed"), new EmploymentRecord('3.2018', "Employed")]);
+    // map.set(4, [new EmploymentRecord('8.2018', "Employed"), new EmploymentRecord('7.2018', "Employed"), new EmploymentRecord('6.2018', "Employed"),
+    // new EmploymentRecord('5.2018', "Employed"), new EmploymentRecord('4.2018', "Unemployed"), new EmploymentRecord('3.2018', "Employed")]);
+    map.set(1, ["Unemployed", "Unemployed", "Unemployed", "Unemployed", "Employed", "Employed"]);
+    map.set(2, ["Employed", "Employed", "Unemployed", "Employed", "Employed", "Employed"]);
+    map.set(3, ["Employed", "Employed", "Employed", "Employed", "Employed", "Employed"]);
+    map.set(4, ["Employed", "Unemployed", "Employed", "Employed", "Employed", "Employed"]);
+    return map;
+})();
 let TOKEN_HOLDERS_COUNT = TOKEN_HOLDERS.length;
 let calculation = (() => {
     let sumBase = 0;
@@ -59,5 +95,9 @@ export {
     OVERALL_TOKENS, 
     INCOME_TOKEN_AMOUNT,
     BASE_TOKEN_AMOUNT, 
-    BASE_TOKEN_AMOUNT_DATE 
+    BASE_TOKEN_AMOUNT_DATE,
+    TOKEN_HOLDERS_INCOMES_MAP_LIMIT,
+    TOKEN_HOLDERS_INCOMES_MAP,
+    TOKEN_HOLDERS_EMPLOYMENT_STATUS_MAP_LIMIT,
+    TOKEN_HOLDERS_EMPLOYMENT_STATUS_MAP
 };

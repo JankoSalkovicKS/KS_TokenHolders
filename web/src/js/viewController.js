@@ -152,16 +152,16 @@ var showHolderTokensPieChart = (baseTokens, incomeTokens) => {
 };
 
 // particular holder income graph
-var showHolderIncomeGraph = () => {
+var showHolderIncomeGraph = (labels, data) => {
     var ctx = document.getElementById("graphIncome");
     var incomeGraph = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: labels,
             datasets: [
                 {
-                    data: [3, 2.8, 3, 2.75, 3, 3.5, 3.5],
-                    label: "Average daily income per month",
+                    data: data,
+                    label: "Daily token incomes per months",
                     backgroundColor: "rgba(151,187,205,0.2)",
                     borderColor: "#5AD3D1",
                     borderWidth: "3",
@@ -194,17 +194,18 @@ var showHolderIncomeGraph = () => {
 };
 
 // particular holder employment graph
-var showHolderEmploymentGraph = () => {
+var showHolderEmploymentGraph = (labels, data) => {
+    console.log(data);
     var ctx = document.getElementById("graphEmployment");
     var employmentGraph = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: labels,
             datasets: [
                 {
                     label: "Employment status through months",
                     backgroundColor: "#FFC870",
-                    data: ['unemployed', "employed", 'unemployed', "employed", "employed", "employed", 'unemployed']
+                    data: data
                 }
             ]
         },
@@ -217,7 +218,7 @@ var showHolderEmploymentGraph = () => {
                 }],
                 yAxes: [{
                     type: 'category',
-                    labels: ['employed', 'unemployed']
+                    labels: ['Employed', 'Unemployed']
                 }]
             }
         },

@@ -15,13 +15,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     initTokenDistributionScreen();
                     break;
                 case "detailsCardBtn":
-                    initTokenHolderDetailsScreen();
+                    initTokenHolderDetailsScreen(1);
                     break;
                 case "loginCardBtn":
-                    console.log("Not implemented!");
+                    initLoginScreen();
                     break;
                 case "userCardBtn":
-                    console.log("Not implemented!");
+                    initUserMainScreen(1);
                     break;
             }
         }
@@ -37,7 +37,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // holder employment status change
     document.getElementById('changeEmplBtn').addEventListener('click', (event) => {
         if(confirm("You are about to change Token Holders employment status. Want to proceed?")){
-            let holder = dataRepo.getTokenHoldersMap().get(parseInt(document.getElementById('employmentStatus').getAttribute('value')));
+            const id = parseInt(document.getElementById('employmentStatus').getAttribute('value'));
+            let holder = dataRepo.getTokenHolderById(id);
             if(holder.employmentStatus === "Employed"){
                 holder.employmentStatus = "Unemployed";
             }
@@ -68,6 +69,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 /* */
 
 /* HELPER FUNCTIONS */
+var initLoginScreen = () => {
+    UIController.hideAllCards();
+
+    
+
+    UIController.showCard('cardLogin');
+};
+var initUserMainScreen = (holderId) => {
+    UIController.hideAllCards();
+
+    let holder = dataRepo.getTokenHolderById(holderId);
+
+    UIController.showCard('cardUserMain');
+}
 var initTokenDistributionScreen = () => {
     //hide everything
     UIController.hideAllCards();
@@ -91,7 +106,7 @@ var initTokenDistributionScreen = () => {
 var initTokenHolderDetailsScreen = (id) => {
     UIController.hideAllCards();
 
-    let holder = dataRepo.getTokenHoldersMap().get(parseInt(id));
+    let holder = dataRepo.getTokenHolderById(parseInt(id));
 
     UIController.setHoldersProfilePic(holder.imageURL);
     UIController.setHoldersName(holder.firstName + " " + holder.lastName);
@@ -107,10 +122,33 @@ var initTokenHolderDetailsScreen = (id) => {
     UIController.setEmploymentStatus(holder.employmentStatus, holder.id);
 
     //not implemented
-    UIController.showHolderIncomeGraph();
-    UIController.showHolderEmploymentGraph();
+    let incomesList = dataRepo.getTokenHolderIncomesById(holder.id);
+    let employmentList = dataRepo.getTokenHolderEmploymentsById(holder.id);
+    let pastMonthsList = getPastMonths(6);
+    UIController.showHolderIncomeGraph(pastMonthsList, incomesList);
+    UIController.showHolderEmploymentGraph(pastMonthsList, employmentList);
 
     UIController.showCard('cardHolderDetails');
+};
+var getPastMonths = (count) => {
+    let monthNames = ['January', 'February', 'March', 'April', 'May','June', 'July',
+        'August', 'September', 'October', 'November', 'December'];
+    var today = new Date();
+    var currentMonth = today.getMonth();
+    let months = [];
+
+    months.unshift(monthNames[currentMonth]);
+    count--;
+
+    while(count > 0){
+        currentMonth --;
+        if(currentMonth === -1){
+            currentMonth = 11;
+        }
+        months.unshift(monthNames[currentMonth]);
+        count--;
+    }
+    return months;
 };
 var setSeniorityLevel = (seniority) => {
     UIController.setSeniorityLevel(seniority);

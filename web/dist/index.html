@@ -2,7 +2,6 @@
 <html>
     <head>
         <title>Token Holders</title>
-
         <!--Bootstrap layout-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
@@ -12,36 +11,23 @@
             crossorigin="anonymous">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
-        
         <!---->
-
         <link rel="stylesheet" href="./css/app.css" />
         <script src="../../node_modules/chart.js/dist/Chart.js"></script>
         <script src="./js/bundle.js"></script>
-
-        <style>
-            .mainContainer{
-                padding-top: 50px;
-                padding-bottom: 30px;
-            }
-            .sectionBody{
-                padding: 30px;
-            }
-            .growBit { 
-                transition: all .2s ease-in-out; }
-            .growBit:hover { 
-                background: #2C96FF;
-                transform: scale(1.05); }
-            .grow { 
-                transition: all .2s ease-in-out; }
-            .grow:hover { 
-                background: #2C96FF;
-                transform: scale(1.3); }
-        </style>
     </head>
+    <!-- Color scheme 1 -->
+    <!-- 
+        Navbar:141414 ili 0D21A1
+        Body: EEF0F2 ili default
+     -->
+     <!-- Color scheme 2 -->
+    <!-- 
+        Navbar:
+        Body:
+     -->
     <body>
-        <!-- style="background-color: #C8D5B9;" -->
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #141414;">
                 <a class="navbar-brand" href="#">
                     <img src="https://ks.digihey.eu/wp-content/uploads/2016/04/logo-3.png" height="30" class="d-inline-block align-top" alt="">
                 </a>
@@ -57,10 +43,10 @@
                             <a class="nav-link" href="#" id="detailsCardBtn">Holder_Details</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Login</a>
+                            <a class="nav-link" href="#" id="loginCardBtn">Login_Screen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Registered_User</a>
+                            <a class="nav-link" href="#" id="userCardBtn">Registered_User</a>
                         </li>
                     </ul>
                 </div>
@@ -90,7 +76,7 @@
                             </div>
                             <div class="col-lg-1">
                                 <button 
-                                    class="btn btn-info btn-sm" 
+                                    class="btn btn-primary btn-sm" 
                                     title="Info corner"
                                     data-container="body" 
                                     data-toggle="popover" 
@@ -172,9 +158,9 @@
                                     </div>
                                 </div>
                                 <span>Income per day:</span>
-                                <h4><span id="income">3</span> tokens </h4>
+                                <h4><span id="income"></span> tokens </h4>
                                 <span>Token half-life:</span>
-                                <h4><span id="halfLife">1</span> year(s) </h4>
+                                <h4><span id="halfLife"></span> year(s) </h4>
                                 <hr />
                                 <span>Employment status:</span>
                                 <h2><span id="employmentStatus"></span>&nbsp;<img id="changeEmplBtn" class="grow" title="Change status" src="./img/change.png" style="height: 40px; border-radius: 50%;"/></h2>
@@ -195,11 +181,16 @@
                 <div class="container" id="cardLogin" hidden>
                     <h1>Login</h1>
                 </div>
-                <div class="container" id="cardUser" hidden>
+                <div class="container" id="cardUserMain" hidden>
                     <h1>Registered user</h1>
                 </div>
             </div>
         </div>
+        <!-- <footer class="footer">
+            <div class="footer-btm-bar text-center">
+                <p>2018 Keeper Solutions</p>
+            </div>
+        </footer> -->
     </body>
 </html>
 <!-- <div class="container-fluid">
