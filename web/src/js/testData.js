@@ -19,6 +19,15 @@ let SENIORITY_LEVELS = [
         halflife: 5
     }
 ];
+let SENIORTY_LEVELS_MAP = (() => {
+    let map = new Map();
+
+    for(let l of SENIORITY_LEVELS){
+        map.set(l.level, l);
+    }
+
+    return map;
+})();
 let SENIORITY_LEVELS_COUNT = SENIORITY_LEVELS.length;
 let TOKEN_HOLDERS = [
     new TokenHolder(1, "Janko", "Šalković", 350000, 300000, 50000, "Junior", "Unemployed", "./img/profilna_Janko.jpg", "July 2018."),
@@ -91,6 +100,7 @@ export {
     TOKEN_HOLDERS_MAP,
     SENIORITY_LEVELS_COUNT, 
     SENIORITY_LEVELS, 
+    SENIORTY_LEVELS_MAP,
     TOKEN_HOLDERS_COUNT, 
     OVERALL_TOKENS, 
     INCOME_TOKEN_AMOUNT,

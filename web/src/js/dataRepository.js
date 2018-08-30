@@ -37,7 +37,9 @@ var getIncomeTokenAmount = () => {
 var getBaseTokenDistributionDate = () => {
     return testData.BASE_TOKEN_AMOUNT_DATE;
 };
-
+var getSeniorityLevelByName = (name) => {
+    return testData.SENIORTY_LEVELS_MAP.get(name);
+};
 export {
     getTokenHolderEmploymentsById,
     getTokenHolderIncomesById,
@@ -49,5 +51,6 @@ export {
     getOverallTokensAmount,
     getBaseTokenAmount,
     getIncomeTokenAmount,
-    getBaseTokenDistributionDate
+    getBaseTokenDistributionDate,
+    getSeniorityLevelByName
 };

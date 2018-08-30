@@ -32,7 +32,6 @@ var fillTokenHoldersList = (tokenHoldersList, overallTokens) => {
         DOMList.insertAdjacentHTML('beforeend', htmlCode);
     }
 };
-//21 14 48 16
 var showOverallTokensPieChart = (labels, data) => {
     var ctxP = document.getElementById("pieChart");
     var myPieChart = new Chart(ctxP, {
@@ -40,7 +39,7 @@ var showOverallTokensPieChart = (labels, data) => {
         data: {
             labels: labels, //labels
             datasets: [
-                {
+                {   
                     data: data, //data
                     backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
                     hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
@@ -128,11 +127,29 @@ var changeEmploymentStatus = () => {
 }
 
 /* Render Charts */
+var showGlobalStakePercentagePieChart = (rest, myStake) => {
+    
+    var ctxP = document.getElementById("globalStakePercPieChart");
+    var pieChart = new Chart(ctxP, {
+        type: 'pie',
+        data: {
+            labels: ["Other holders", "My stake"],
+            datasets: [
+                {
+                    data: [rest, myStake],
+                    backgroundColor: ["#949FB1", "#FDB45C"],
+                    hoverBackgroundColor: ["#A8B3C5", "#FFC870"]
+                }
+            ]
+        },
+        options: {
+            responsive: true
+        }
+    });
+};
+var showHolderTokensPieChart = (baseTokens, incomeTokens, graphId) => {
 
-// particular holder token PieChart
-var showHolderTokensPieChart = (baseTokens, incomeTokens) => {
-
-    var ctxP = document.getElementById("holderPieChart");
+    var ctxP = document.getElementById(graphId);//holderPieChart
     var myPieChart = new Chart(ctxP, {
         type: 'pie',
         data: {
@@ -150,10 +167,8 @@ var showHolderTokensPieChart = (baseTokens, incomeTokens) => {
         }
     });
 };
-
-// particular holder income graph
-var showHolderIncomeGraph = (labels, data) => {
-    var ctx = document.getElementById("graphIncome");
+var showHolderIncomeGraph = (labels, data, graphId) => {
+    var ctx = document.getElementById(graphId);//"graphIncome"
     var incomeGraph = new Chart(ctx, {
         type: 'line',
         data: {
@@ -192,11 +207,8 @@ var showHolderIncomeGraph = (labels, data) => {
         }
     });
 };
-
-// particular holder employment graph
-var showHolderEmploymentGraph = (labels, data) => {
-    console.log(data);
-    var ctx = document.getElementById("graphEmployment");
+var showHolderEmploymentGraph = (labels, data, graphId) => {
+    var ctx = document.getElementById(graphId);//graphEmployment
     var employmentGraph = new Chart(ctx, {
         type: 'line',
         data: {
@@ -231,6 +243,7 @@ function numberWithCommas(x) {
 }
 
 export { 
+    showGlobalStakePercentagePieChart,
     showHolderEmploymentGraph,
     showHolderIncomeGraph,
     showHolderTokensPieChart,
