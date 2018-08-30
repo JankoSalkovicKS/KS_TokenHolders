@@ -13,18 +13,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // change card
     document.getElementById('navbar').addEventListener('click', (event) => {
         if(event.target.className === 'nav-link'){
+            //make all links unactive
+            //UIController.deactivateAllNavbarLinks();
             switch(event.target.getAttribute('id')){
                 case "tokensCardBtn":
                     initTokenDistributionScreen();
+                    //UIController.activateNavbarLink("tokensCardBtn");
                     break;
                 case "detailsCardBtn":
                     initTokenHolderDetailsScreen(1);
+                    //UIController.activateNavbarLink("detailsCardBtn");
                     break;
                 case "loginCardBtn":
                     initLoginScreen();
+                    //UIController.activateNavbarLink("loginCardBtn");
                     break;
                 case "userCardBtn":
                     initUserMainScreen(1);
+                    //UIController.activateNavbarLink("userCardBtn");
                     break;
             }
         }
@@ -39,26 +45,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
             initTokenHolderDetailsScreen(event.target.getAttribute('id'));
         }
     });
-    var initTokenDistributionScreen = () => {
-        //hide everything
-        UIController.hideAllCards();
-        //show distribution pie chart
-        let labels = [];
-        let data = [];
-        for(let user of dataRepo.getTokenHoldersList()){
-            labels.push(user.firstName + " " + user.lastName);
-            data.push(user.overallTokens);
-        }
-        UIController.showOverallTokensPieChart(labels, data)
-        //show right column info
-        UIController.setOverallTokens(dataRepo.getOverallTokensAmount());
-        UIController.setBaseTokenAmount(dataRepo.getBaseTokenAmount());
-        UIController.setBaseTokenAmountDate(dataRepo.getBaseTokenDistributionDate());
-        UIController.setTokenHoldersCount(dataRepo.getTokenHoldersCount());
-        UIController.fillTokenHoldersList(dataRepo.getTokenHoldersList(), dataRepo.getOverallTokensAmount());
-        //show card
-        UIController.showCard('cardTokenDistribution');
-    };
     //////////////////////////////////
     /*
         Holder details
@@ -92,33 +78,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
         document.getElementById('seniorityPicker').hidden = true;
         document.getElementById('seniority').hidden = false;
     });
-    var initTokenHolderDetailsScreen = (id) => {
-        UIController.hideAllCards();
-    
-        let holder = dataRepo.getTokenHolderById(parseInt(id));
-    
-        UIController.setHoldersProfilePic(holder.imageURL);
-        UIController.setHoldersName(holder.firstName + " " + holder.lastName);
-        UIController.setHoldersTokenAmount(holder.overallTokens);
-        UIController.setHoldersTokenStake( Math.round((100 *holder.overallTokens / dataRepo.getOverallTokensAmount())));
-        UIController.showBadgeGlobalStatus(dataRepo.getTokenHoldersCount(), dataRepo.getOverallTokensAmount());
-        UIController.showHolderTokensPieChart(holder.baseTokens, holder.incomeTokens, "holderPieChart");
-        UIController.showHoldersJoinDate(holder.joinDate);
-        //seniority level - init
-        UIController.initSenioritySelectList(dataRepo.getSeniorityLevels());
-        //seniority level - set
-        setSeniorityLevel(holder.seniorityLevel);
-        UIController.setEmploymentStatus(holder.employmentStatus, holder.id);
-    
-        //not implemented
-        let incomesList = dataRepo.getTokenHolderIncomesById(holder.id);
-        let employmentList = dataRepo.getTokenHolderEmploymentsById(holder.id);
-        let pastMonthsList = getPastMonths(6);
-        UIController.showHolderIncomeGraph(pastMonthsList, incomesList, "graphIncome");
-        UIController.showHolderEmploymentGraph(pastMonthsList, employmentList, "graphEmployment");
-    
-        UIController.showCard('cardHolderDetails');
-    };
     //////////////////////////////////
     /*
         Registered user
@@ -140,37 +99,89 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById('btnChangePicApprove').addEventListener('click', (event) => {
         console.log("Picture change not implemented jet...");
     });
-    var initUserMainScreen = (holderId) => {
-        UIController.hideAllCards();
-        let holder = dataRepo.getTokenHolderById(holderId);
     
-        document.getElementById("userProfilePic").setAttribute("src", holder.imageURL);
     
-        document.getElementById("userName").textContent = holder.firstName + " " + holder.lastName;
-        document.getElementById("userTokenAmount").textContent = numberWithCommas(holder.overallTokens);
-        document.getElementById("globalTokenAmount").textContent = numberWithCommas(dataRepo.getOverallTokensAmount());
-        document.getElementById("userJoinDate").textContent = holder.joinDate;
-        document.getElementById("userSeniority").textContent = holder.seniorityLevel;
-        let seniority = dataRepo.getSeniorityLevelByName(holder.seniorityLevel);
-        document.getElementById("userIncomePerDay").textContent = seniority.income;
-        document.getElementById("userTokenHalfLife").textContent = seniority.halflife;
-        document.getElementById("userEmploymentStatus").textContent = holder.employmentStatus;
-    
-        let myStake = Math.round((100 *holder.overallTokens / dataRepo.getOverallTokensAmount()));
-        UIController.showGlobalStakePercentagePieChart(100 - myStake, myStake);
-        UIController.showHolderTokensPieChart(holder.baseTokens, holder.incomeTokens, "userTokenDistPieChart");
-    
-        let incomesList = dataRepo.getTokenHolderIncomesById(holder.id);
-        let employmentList = dataRepo.getTokenHolderEmploymentsById(holder.id);
-        let pastMonthsList = getPastMonths(6);
-        UIController.showHolderIncomeGraph(pastMonthsList, incomesList, "userGraphIncome");
-        UIController.showHolderEmploymentGraph(pastMonthsList, employmentList, "userGraphEmployment");
-    
-        UIController.showCard('cardUserMain');
-    }
-    
-})
+});
 
+//////////////////////////////////
+/*
+    Init Functions
+*/
+var initTokenDistributionScreen = () => {
+    //hide everything
+    UIController.hideAllCards();
+    //show distribution pie chart
+    let labels = [];
+    let data = [];
+    for(let user of dataRepo.getTokenHoldersList()){
+        labels.push(user.firstName + " " + user.lastName);
+        data.push(user.overallTokens);
+    }
+    UIController.showOverallTokensPieChart(labels, data)
+    //show right column info
+    UIController.setOverallTokens(dataRepo.getOverallTokensAmount());
+    UIController.setBaseTokenAmount(dataRepo.getBaseTokenAmount());
+    UIController.setBaseTokenAmountDate(dataRepo.getBaseTokenDistributionDate());
+    UIController.setTokenHoldersCount(dataRepo.getTokenHoldersCount());
+    UIController.fillTokenHoldersList(dataRepo.getTokenHoldersList(), dataRepo.getOverallTokensAmount());
+    //show card
+    UIController.showCard('cardTokenDistribution');
+};
+var initTokenHolderDetailsScreen = (id) => {
+    UIController.hideAllCards();
+
+    let holder = dataRepo.getTokenHolderById(parseInt(id));
+
+    UIController.setHoldersProfilePic(holder.imageURL);
+    UIController.setHoldersName(holder.firstName + " " + holder.lastName);
+    UIController.setHoldersTokenAmount(holder.overallTokens);
+    UIController.setHoldersTokenStake( Math.round((100 *holder.overallTokens / dataRepo.getOverallTokensAmount())));
+    UIController.showBadgeGlobalStatus(dataRepo.getTokenHoldersCount(), dataRepo.getOverallTokensAmount());
+    UIController.showHolderTokensPieChart(holder.baseTokens, holder.incomeTokens, "holderPieChart");
+    UIController.showHoldersJoinDate(holder.joinDate);
+    //seniority level - init
+    UIController.initSenioritySelectList(dataRepo.getSeniorityLevels());
+    //seniority level - set
+    setSeniorityLevel(holder.seniorityLevel);
+    UIController.setEmploymentStatus(holder.employmentStatus, holder.id);
+
+    //not implemented
+    let incomesList = dataRepo.getTokenHolderIncomesById(holder.id);
+    let employmentList = dataRepo.getTokenHolderEmploymentsById(holder.id);
+    let pastMonthsList = getPastMonths(6);
+    UIController.showHolderIncomeGraph(pastMonthsList, incomesList, "graphIncome");
+    UIController.showHolderEmploymentGraph(pastMonthsList, employmentList, "graphEmployment");
+
+    UIController.showCard('cardHolderDetails');
+};
+var initUserMainScreen = (holderId) => {
+    UIController.hideAllCards();
+    let holder = dataRepo.getTokenHolderById(holderId);
+
+    document.getElementById("userProfilePic").setAttribute("src", holder.imageURL);
+
+    document.getElementById("userName").textContent = holder.firstName + " " + holder.lastName;
+    document.getElementById("userTokenAmount").textContent = numberWithCommas(holder.overallTokens);
+    document.getElementById("globalTokenAmount").textContent = numberWithCommas(dataRepo.getOverallTokensAmount());
+    document.getElementById("userJoinDate").textContent = holder.joinDate;
+    document.getElementById("userSeniority").textContent = holder.seniorityLevel;
+    let seniority = dataRepo.getSeniorityLevelByName(holder.seniorityLevel);
+    document.getElementById("userIncomePerDay").textContent = seniority.income;
+    document.getElementById("userTokenHalfLife").textContent = seniority.halflife;
+    document.getElementById("userEmploymentStatus").textContent = holder.employmentStatus;
+
+    let myStake = Math.round((100 *holder.overallTokens / dataRepo.getOverallTokensAmount()));
+    UIController.showGlobalStakePercentagePieChart(100 - myStake, myStake);
+    UIController.showHolderTokensPieChart(holder.baseTokens, holder.incomeTokens, "userTokenDistPieChart");
+
+    let incomesList = dataRepo.getTokenHolderIncomesById(holder.id);
+    let employmentList = dataRepo.getTokenHolderEmploymentsById(holder.id);
+    let pastMonthsList = getPastMonths(6);
+    UIController.showHolderIncomeGraph(pastMonthsList, incomesList, "userGraphIncome");
+    UIController.showHolderEmploymentGraph(pastMonthsList, employmentList, "userGraphEmployment");
+
+    UIController.showCard('cardUserMain');
+}
 //////////////////////////////////
 /*
     HELPER FUNCTIONS

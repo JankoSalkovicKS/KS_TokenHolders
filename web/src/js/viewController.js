@@ -65,6 +65,17 @@ var hideAllCards = () => {
         }
     }
 }
+var deactivateAllNavbarLinks = () => {
+    var children = document.getElementById('navbar').childNodes;
+    for(var child of children) {
+        if(child.nodeType == Node.ELEMENT_NODE){
+            child.classList.remove("act");
+        }
+    }
+};
+var activateNavbarLink = (id) => {
+    document.getElementById(id).classList.add("act");
+};
 
 ////////////////////////////////////////////////////
 /* Token holder details */
@@ -253,6 +264,8 @@ export {
     updateHolderTokenFactors,
     initSenioritySelectList,
     showCard,
+    deactivateAllNavbarLinks,
+    activateNavbarLink,
     hideAllCards,
     setOverallTokens,
     setBaseTokenAmount,
