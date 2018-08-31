@@ -18,7 +18,7 @@ var fillTokenHoldersList = (tokenHoldersList, overallTokens) => {
     DOMList.innerHTML = "";
 
     for(let holder of tokenHoldersList){
-        let htmlCode = 
+        let htmlCode =
         `<tr>
             <td class="text-center"><img src="${holder.imageURL}" style="height: 30px;" /></td>
             <td>${holder.firstName}</td>
@@ -39,7 +39,7 @@ var showOverallTokensPieChart = (labels, data) => {
         data: {
             labels: labels, //labels
             datasets: [
-                {   
+                {
                     data: data, //data
                     backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"],
                     hoverBackgroundColor: ["#FF5A5E", "#5AD3D1", "#FFC870", "#A8B3C5", "#616774"]
@@ -56,7 +56,7 @@ var showOverallTokensPieChart = (labels, data) => {
 /* Cards */
 var showCard = (cardID) => {
     document.getElementById(cardID).hidden = false;
-}; 
+};
 var hideAllCards = () => {
     var children = document.getElementById('cards').childNodes;
     for(var child of children) {
@@ -139,7 +139,7 @@ var changeEmploymentStatus = () => {
 
 /* Render Charts */
 var showGlobalStakePercentagePieChart = (rest, myStake) => {
-    
+
     var ctxP = document.getElementById("globalStakePercPieChart");
     var pieChart = new Chart(ctxP, {
         type: 'pie',
@@ -245,7 +245,7 @@ var showHolderEmploymentGraph = (labels, data, graphId) => {
                 }]
             }
         },
-        
+
     });
 };
 
@@ -253,7 +253,7 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-export { 
+export {
     showGlobalStakePercentagePieChart,
     showHolderEmploymentGraph,
     showHolderIncomeGraph,

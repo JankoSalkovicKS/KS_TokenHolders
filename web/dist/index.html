@@ -1,254 +1,269 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
 
-        <title>Token Holders</title>
-        <!--Bootstrap layout-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+<head>
+    <meta charset="UTF-8">
+
+    <title>Token Holders</title>
+    <!--Bootstrap layout-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-            crossorigin="anonymous">
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-        <!---->
-        <link rel="stylesheet" href="./css/app.css" />
-        <script src="../../node_modules/chart.js/dist/Chart.js"></script>
-        <script src="./js/bundle.js"></script>
-    </head>
-    <body>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #141414;">
-                <a class="navbar-brand" href="#">
-                    <img src="https://ks.digihey.eu/wp-content/uploads/2016/04/logo-3.png" height="30" class="d-inline-block align-top" alt="">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav" id="navbar" >
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="tokensCardBtn">Global_Token_Distribution</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="detailsCardBtn">Holder_Details</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="loginCardBtn">Login_Screen</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="userCardBtn">Registered_User</a>
-                        </li>
-                    </ul>
-                </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+    <!---->
+    <link rel="stylesheet" href="./css/app.css" />
+    <script src="../../node_modules/chart.js/dist/Chart.js"></script>
+    <script src="./js/bundle.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: whitesmoke; box-shadow: 0px 1px 5px 0px gray;">
+            <a class="navbar-brand">
+                <img src="https://ks.digihey.eu/wp-content/uploads/2016/04/logo-3.png" height="30" class="d-inline-block align-top" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav" id="navbar">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="tokensCardBtn">Global</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="detailsCardBtn">Holder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="loginCardBtn">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="userCardBtn">User</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
-        <div class="container mainContainer">
-            <div id="cards">
-                <div class="container" id="cardTokenDistribution" hidden>
+    </div>
+    <div class="mainContainer">
+        <div id="cards">
+            <div id="cardTokenDistribution" hidden>
+                <div class="container-fluid text-center card-title">
+                    <br />
+                    <h1>Global token distribution</h1>
                     <hr />
-                    <h3>Token Distribution</h3>
-                    <hr />
-                    <div class="container">
-                        <div class="row sectionBody">
-                            <div class="col-lg-6 text-center">
-                                <span>Top 5 token holders</span>
-                                <canvas id="pieChart"></canvas>
-                            </div>
-                            <div class="col-lg-5 text-center">
-                                <span>Overall tokens:</span>
-                                <h1 title="Total ammount of tokens"><img src="./img/coin.png" style="height: 50px;"/> <span id="totalTokenAmount"></span></h1>
-                                <span>Base token amount:</span> 
-                                <h2 id="baseTokenAmount"></h2>
-                                <span>Base token amount Affirmation Date</span>
-                                <h2 id="baseTokenAmountDate"></h2>
-                                <hr />
-                                <span>Token Holders count:</span>
-                                <h2 id="tokenHoldersCount"></h2>
-                            </div>
-                            <div class="col-lg-1">
-                                <button 
-                                    class="btn btn-primary btn-sm" 
-                                    title="Info corner"
-                                    data-container="body" 
-                                    data-toggle="popover" 
-                                    data-placement="right"
-                                    data-trigger="focus" 
-                                    data-content=
-                                    "Base_token_amount - amount of tokens initially distributed among the token holders. Does not contain tokens gained through daily-based token income. 
+                </div>
+                <div class="container">
+                    <div class="row sectionBody">
+                        <div class="col-lg-6 text-center">
+                            <span>Top 5 token holders</span>
+                            <canvas id="pieChart"></canvas>
+                        </div>
+                        <div class="col-lg-5 text-center">
+                            <span>Overall tokens:</span>
+                            <h1 title="Total ammount of tokens"><img src="./img/coin.png" style="height: 50px;" /> <span
+                                    id="totalTokenAmount"></span></h1>
+                            <span>Base token amount:</span>
+                            <h2 id="baseTokenAmount"></h2>
+                            <span>Base token amount Affirmation Date</span>
+                            <h2 id="baseTokenAmountDate"></h2>
+                            <hr />
+                            <span>Token Holders count:</span>
+                            <h2 id="tokenHoldersCount"></h2>
+                        </div>
+                        <div class="col-lg-1">
+                            <button class="btn btn-primary btn-sm" title="Info corner" data-container="body" data-toggle="popover" data-placement="right"
+                                data-trigger="focus" data-content="Base_token_amount - amount of tokens initially distributed among the token holders. Does not contain tokens gained through daily-based token income. 
                                     Overall_tokens - consists of base token amount and tokens gained through daily-based token income for every token holder.
-                                    "
-                                >
-                                    Info
-                                </button>
-                            </div>
-                        </div>
-                    </div>   
-                    <div class="container sectionHolders">
-                        <div class="container sectionBody">
-                            <table class="table">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th scope="col">Picture</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Surname</th>
-                                        <th class="text-right" scope="col">Base tokens</th>
-                                        <th class="text-right" scope="col">Income tokens</th>
-                                        <th class="text-right" scope="col">Stake percentage</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tokenHoldersList">
-                                    <!-- Rendered in JS -->
-                                </tbody>
-                            </table>
+                                    ">
+                                Info
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="container" id="cardHolderDetails" hidden>
+                <div class="container sectionHolders">
+                    <div class="container sectionBody">
+                        <table class="table">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Picture</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Surname</th>
+                                    <th class="text-right" scope="col">Base tokens</th>
+                                    <th class="text-right" scope="col">Income tokens</th>
+                                    <th class="text-right" scope="col">Stake percentage</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="tokenHoldersList">
+                                <!-- Rendered in JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="cardHolderDetails" hidden>
+                <div class="container-fluid text-center card-title">
+                    <br />
+                    <h1>Holder Details</h1>
                     <hr />
-                    <h3>Token Holder Details</h3>
-                    <hr />
-                    <div class="sectionBody container" id="aboutTokenHolder">
-                        <div class="row">
-                            <div class="col-lg-3 text-center">
-                                <img id="holderProfilePic" class="glow" style="width: 100%;" />
-                            </div>
-                            <div class="col-lg-4">
-                                <hr />
-                                <span>Name:</span>
-                                <h3 id="holderName"></h3>
-                                <span>Token amount:</span>
-                                <h1>
-                                    <span id="holderTokenAmount"></span> 
-                                    <button
-                                        id="globalInfo" 
-                                        class="badge badge-secondary growBit" 
-                                        role="button" 
-                                        data-toggle="popover" 
-                                        data-trigger="focus" 
-                                        title="Global state" 
-                                        data-content="..."
-                                    >
+                </div>
+                <div class="sectionBody container" id="aboutTokenHolder">
+                    <div class="row">
+                        <div class="col-lg-3 text-center">
+                            <img id="holderProfilePic" class="glow" style="width: 100%;" />
+                        </div>
+                        <div class="col-lg-4">
+                            <hr />
+                            <span>Name:</span>
+                            <h3 id="holderName"></h3>
+                            <span>Token amount:</span>
+                            <h1>
+                                <span id="holderTokenAmount"></span>
+                                <button id="globalInfo" class="badge badge-secondary growBit" role="button" data-toggle="popover" data-trigger="focus" title="Global state"
+                                    data-content="...">
                                     <span id="holderStakePercentage"></span>
-                                    </button>
-                                </h1>
-                                <span>In company since:</span>
-                                <h4 id="joinDate"></h4>
-                                <span>Token distribution per holder:</span>
-                                <canvas id="holderPieChart" style="width: 100%;"></canvas>
-                            </div>
-                            <div class="col-lg-5 text-center">
-                                <hr />
-                                <span>Seniority level:</span>
-                                <div id="seniorityLevel" >
-                                    <h4 id="seniority">Junior</h4>
-                                    <div class="form-group" id="seniorityPicker" hidden>
-                                        <select class="form-control" id="sel1">
-                                            <!-- Rendered in JS -->
-                                        </select>
-                                    </div>
+                                </button>
+                            </h1>
+                            <span>In company since:</span>
+                            <h4 id="joinDate"></h4>
+                            <span>Token distribution per holder:</span>
+                            <canvas id="holderPieChart" style="width: 100%;"></canvas>
+                        </div>
+                        <div class="col-lg-5 text-center">
+                            <hr />
+                            <span>Seniority level:</span>
+                            <div id="seniorityLevel">
+                                <h4 id="seniority">Junior</h4>
+                                <div class="form-group" id="seniorityPicker" hidden>
+                                    <select class="form-control" id="sel1">
+                                        <!-- Rendered in JS -->
+                                    </select>
                                 </div>
-                                <span>Income per day:</span>
-                                <h4><span id="income"></span> tokens </h4>
-                                <span>Token half-life:</span>
-                                <h4><span id="halfLife"></span> year(s) </h4>
-                                <hr />
-                                <span>Employment status:</span>
-                                <h2><span id="employmentStatus"></span>&nbsp;<img id="changeEmplBtn" class="grow" title="Change status" src="./img/change.png" style="height: 40px; border-radius: 50%;"/></h2>
-                                <hr />
                             </div>
-                        </div>
-                    </div>
-                    <div class="sectionBody container" id="tokenHolderStatistics">
-                        <div class="container text-center" id="statisticsIncome">
-                            <canvas id="graphIncome"></canvas>
-                        </div>
-                        <br /><br/>
-                        <div class="container" id="statisticsEmployment">
-                            <canvas id="graphEmployment"></canvas>
+                            <span>Income per day:</span>
+                            <h4><span id="income"></span> tokens </h4>
+                            <span>Token half-life:</span>
+                            <h4><span id="halfLife"></span> year(s) </h4>
+                            <hr />
+                            <span>Employment status:</span>
+                            <h2><span id="employmentStatus"></span>&nbsp;<img id="changeEmplBtn" class="grow" title="Change status"
+                                    src="./img/change.png" style="height: 40px; border-radius: 50%;" /></h2>
+                            <hr />
                         </div>
                     </div>
                 </div>
-                <div class="container" id="cardLogin" hidden>
-                    <h1>Login</h1>
+                <div class="sectionBody container" id="tokenHolderStatistics">
+                    <div class="container text-center" id="statisticsIncome">
+                        <canvas id="graphIncome"></canvas>
+                    </div>
+                    <br /><br/>
+                    <div class="container" id="statisticsEmployment">
+                        <canvas id="graphEmployment"></canvas>
+                    </div>
                 </div>
-                <div class="container" id="cardUserMain" hidden>
+            </div>
+            <div class="container" id="cardLogin" hidden>
+                <h1>Login</h1>
+            </div>
+            <div id="cardUserMain" hidden>
+                <div class="container-fluid text-center card-title">
+                    <br />
+                    <h1>Registered user</h1>
                     <hr />
-                    <h3>Registered user</h3>
-                    <hr />
-                    <div class="container sectionBody">
-                        <div class="row">
-                            <div class="col-lg-4 text-center">
-                                <img id="userProfilePic" class="glow" style="width: 100%;" />
-                                <div class="input-group mb-3" id="inputGroupNewPic" hidden>
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon3">https://</span>
-                                    </div>
-                                    <input type="text" class="form-control" id="userNewPicURL" aria-describedby="basic-addon3">
+                </div>
+                <div class="container sectionBody" id="sectionAbout">
+                    <div class="row">
+                        <div class="col-lg-4 text-center">
+                            <img id="userProfilePic" class="glow" style="width: 100%;" />
+                            <div class="input-group mb-3" id="inputGroupNewPic" hidden>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">https://</span>
                                 </div>
-                                <div class="btn-group float-left" role="group">
-                                    <button class="btn btn-primary" id="btnChangePic">Change</button>
-                                    <button class="btn btn-success" id="btnChangePicApprove" hidden>Change</button>
-                                    <button class="btn btn-warning" id="btnDiscardChangePic" hidden>Discard</button>
-                                </div>
-                                
+                                <input type="text" class="form-control" id="userNewPicURL" aria-describedby="basic-addon3">
                             </div>
-                            <div class="col-lg-4">
-                                <hr />
-                                <span>Name:</span>
-                                <h3 id="userName"></h3>
-                                <span>Token amount:</span>
-                                <h1 id="userTokenAmount"></h1>
-                                <span>Global token amount:</span>
-                                <h3 id="globalTokenAmount"></h3>
-                                <span>In company since:</span>
-                                <h4 id="userJoinDate"></h4>
+                            <div class="btn-group float-left" role="group">
+                                <button class="btn btn-primary" id="btnChangePic">Change</button>
+                                <button class="btn btn-success" id="btnChangePicApprove" hidden>Change</button>
+                                <button class="btn btn-warning" id="btnDiscardChangePic" hidden>Discard</button>
                             </div>
-                            <div class="col-lg-4 text-center">
-                                <hr />
-                                <span>Seniority level:</span>
-                                <h4 id="userSeniority"></h4>
-                                <span>Income per day:</span>
-                                <h4><span id="userIncomePerDay"></span> tokens</h4>
-                                <span>Token half-life:</span>
-                                <h4><span id="userTokenHalfLife"></span> year(s) </h4>
-                                <hr />
-                                <span>Employment status:</span>
-                                <h2 id="userEmploymentStatus"></h2>
-                                <hr />
-                            </div>
+
+                        </div>
+                        <div class="col-lg-4">
+                            <hr />
+                            <span>Name:</span>
+                            <h3 id="userName"></h3>
+                            <span>Token amount:</span>
+                            <h1 id="userTokenAmount"></h1>
+                            <span>Global token amount:</span>
+                            <h3 id="globalTokenAmount"></h3>
+                            <span>In company since:</span>
+                            <h4 id="userJoinDate"></h4>
+                        </div>
+                        <div class="col-lg-4 text-center">
+                            <hr />
+                            <span>Seniority level:</span>
+                            <h4 id="userSeniority"></h4>
+                            <span>Income per day:</span>
+                            <h4><span id="userIncomePerDay"></span> tokens</h4>
+                            <span>Token half-life:</span>
+                            <h4><span id="userTokenHalfLife"></span> year(s) </h4>
+                            <hr />
+                            <span>Employment status:</span>
+                            <h2 id="userEmploymentStatus"></h2>
+                            <hr />
                         </div>
                     </div>
-                    <div class="container sectionBody">
-                        <div class="row text-center">
-                            <div class="col-lg-6 userPieChart">
-                                <span>Personal token distribution:</span>
-                                <canvas id="userTokenDistPieChart" style="width: 100%;"></canvas>
-                            </div>
-                            <div class="col-lg-6 userPieChart">
-                                <span>Global stake percentage:</span>
-                                <canvas id="globalStakePercPieChart" style="width: 100%;"></canvas>
-                            </div>
+                </div>
+                <div class="container sectionBody" id="sectionTokenDist">
+                    <div class="row text-center">
+                        <div class="col-lg-6 userPieChart">
+                            <span>Personal token distribution:</span>
+                            <canvas id="userTokenDistPieChart" style="width: 100%;"></canvas>
+                        </div>
+                        <div class="col-lg-6 userPieChart">
+                            <span>Global stake percentage:</span>
+                            <canvas id="globalStakePercPieChart" style="width: 100%;"></canvas>
                         </div>
                     </div>
-                    <div class="container sectionBody">
-                        <div class="container text-center" id="statisticsIncome">
-                            <canvas id="userGraphIncome"></canvas>
-                        </div>
+                </div>
+                <div class="container sectionBody" id="sectionIncome">
+                    <div class="container text-center" id="statisticsIncome">
+                        <canvas id="userGraphIncome"></canvas>
                     </div>
-                    <div class="container sectionBody">
-                        <div class="container" id="statisticsEmployment">
-                            <canvas id="userGraphEmployment"></canvas>
-                        </div>
+                </div>
+                <div class="container sectionBody" id="sectionEmployment">
+                    <div class="container" id="statisticsEmployment">
+                        <canvas id="userGraphEmployment"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <footer class="footer">
-            <div class="footer-btm-bar text-center">
-                <p>2018 Keeper Solutions</p>
+    </div>
+    <footer class="footer">
+        <div class="container footer-body">
+            <div class="row">
+                <div class="col-md-6 footer-body-col">
+                    <span class="footer-title">About</span>
+                    <p>
+                        Keeper Solutions is a full-function software services operation complete with near-shore delivery facilities in Croatia,
+                        Serbia and Romania. We help our clients in UK and Ireland to scale their software operations easily.
+                    </p>
+                </div>
+                <div class="col-md-3 footer-body-col">
+                    <span class="footer-title">Contact us</span>
+                    <i class="soc-icon social social-linked-in"></i>
+                </div>
             </div>
-        </footer> -->
-    </body>
+            <hr class="footer-hr" />
+        </div>
+        <div class="footer-btm-bar text-center">
+            <p>2018 Keeper Solutions</p>
+        </div>
+    </footer>
+</body>
+
 </html>

@@ -4,9 +4,6 @@ import * as dataRepo from './dataRepository';
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
-    initUserMainScreen(3);
-
-    //////////////////////////////////
     /*
         Navigation
     */
@@ -21,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     //UIController.activateNavbarLink("tokensCardBtn");
                     break;
                 case "detailsCardBtn":
-                    initTokenHolderDetailsScreen(1);
+                    initTokenHolderDetailsScreen(4);
                     //UIController.activateNavbarLink("detailsCardBtn");
                     break;
                 case "loginCardBtn":
@@ -29,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     //UIController.activateNavbarLink("loginCardBtn");
                     break;
                 case "userCardBtn":
-                    initUserMainScreen(1);
+                    initUserMainScreen(4);
                     //UIController.activateNavbarLink("userCardBtn");
                     break;
             }
